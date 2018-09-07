@@ -82,9 +82,18 @@ module.exports = __webpack_require__(40);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('user-list-component', __webpack_require__(41));
+// Vue.component('userlist-component', require('./components/UserlistComponent.vue'));
+Vue.use(VueRouter);
+var router = new VueRouter({
+    mode: 'history',
+    routes: [{
+        path: '/',
+        component: __webpack_require__(41)
+    }]
+});
+
 var app = new Vue({
-  el: '#app'
+    el: '#app'
 });
 
 /***/ }),
@@ -114,7 +123,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/js/components/UserListComponent.vue"
+Component.options.__file = "resources/js/components/UserlistComponent.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -123,9 +132,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-22f71719", Component.options)
+    hotAPI.createRecord("data-v-3832d739", Component.options)
   } else {
-    hotAPI.reload("data-v-22f71719", Component.options)
+    hotAPI.reload("data-v-3832d739", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -248,11 +257,8 @@ module.exports = function normalizeComponent (
 /***/ }),
 
 /***/ 43:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
 //
 //
 //
@@ -269,11 +275,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-/* harmony default export */ __webpack_exports__["default"] = ({
-    mounted: function mounted() {
-        console.log('Component mounted.');
+/*
+    export default {
+        data: {
+            users: {}
+        },
+        mounted() {
+            var url = '/ajax/user';
+            var self = this;
+            axios.get(url).then(function(response){
+                self.users = response.data;
+                console.log(users);
+            });
+        }
     }
-});
+*/
+console.log("success!!!");
 
 /***/ }),
 
@@ -311,7 +328,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-22f71719", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-3832d739", module.exports)
   }
 }
 
