@@ -6,11 +6,14 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <h1>Job Detail</h1>
+                    <h1>Dashbord</h1>
                 </div>
                 <div class="card-body">
                     <div id="app">
-                        <job-datail-component></job-datail-component>
+                        <index></index>
+                        <passport-clients></passport-clients>
+                        <passport-authorized-clients></passport-authorized-clients>
+                        <passport-personal-access-tokens></passport-personal-access-tokens>
                     </div>
                 </div>
                 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.min.js"></script>

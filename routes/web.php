@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 Auth::routes();
@@ -20,4 +20,27 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('users', 'UserController');
-Route::get('ajax/user', 'Ajax\UserController@index');
+Route::resource('ajax/user', 'Ajax\UserController');
+
+Route::get('/redirect', function () {
+    $query = http_build_query([
+        'client_id' => 'client-id',
+        'redirect_uri' => 'https://vm.jpm.jp/auth/callback',
+        'response_type' => 'code',
+        'scope' => '',
+    ]);
+    return redirect('https://vm.jpm.jp/oauth/authorize?'.$query);
+});
+Route::get('/callback', function (Request $request) {
+    $http = new GuzzleHttp\Client;
+    $response = $http->post('https://vm.jpm.jp/oauth/token', [
+        'form_params' => [
+            'grant_type' => 'authorization_code',
+            'client_id' => 'client-id',
+            'client_secret' => 'client-secret',
+            'redirect_uri' => 'https://vm.jpm.jp/auth/callback',
+            'code' => $request->code,
+        ],
+    ]);
+    return json_decode((string) $response->getBody(), true);
+});

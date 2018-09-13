@@ -6,25 +6,54 @@
 
 // vueとvue-routerの定義
 import Vue from 'vue'
-import VueRouter from 'vue-router'
+// import VueRouter from 'vue-router'
+// import router from './router'
+import Index from './components/Index.vue'
 
 // bootstrap.jsのrequire
 require('./bootstrap');
 
 // vue-routerを使う宣言
-Vue.use(VueRouter);
+//Vue.use(VueRouter);
 
 window.Vue = require('vue');
 
-const router = new VueRouter({
-    mode: 'history',
-    routes: [{
-        path: '/users',
-        component: require('./components/UserlistComponent.vue')
-    }]
+// OAuth2.0 フロントエンド
+Vue.component(
+    'passport-clients',
+    require('./components/passport/Clients.vue')
+);
+
+Vue.component(
+    'passport-authorized-clients',
+    require('./components/passport/AuthorizedClients.vue')
+);
+
+Vue.component(
+    'passport-personal-access-tokens',
+    require('./components/passport/PersonalAccessTokens.vue')
+);
+
+const data = {
+    name: 'Client Name',
+    redirect: 'https://vm.jpm.jp/auth/callback'
+};
+axios.get('/oauth/clients').then(response => {
+    console.log(response.data);
 });
+axios.post('/oauth/clients', data).then(response => {
+    console.log(response.data);
+}).catch (response => {});
+axios.put('/oauth/clients/' + clientId, data).then(response => {
+    console.log(response.data);
+}).catch (response => {});
+axios.delete('/oauth/clients/' + clientId).then(response => {});
 
 const app = new Vue({
-    router,
-    el: '#app'
+    el: '#app',
+    // router: router,
+    components: {
+        Index
+    },
+    template: '<index></index>'
 });

@@ -2,15 +2,15 @@
     <table class="table table-striped table-bordered table-hover">
         <tr>
             <th>id</th>
-            <td>{{ user.id }}</td>
+            <td>{{ job.id }}</td>
         </tr>
         <tr>
             <th>name</th>
-            <td>{{ user.name }}</td>
+            <td>{{ job.name }}</td>
         </tr>
         <tr>
             <th>email</th>
-            <td>{{ user.email }}</td>
+            <td>{{ job.email }}</td>
         </tr>
     </table>
 </template>
@@ -19,14 +19,14 @@
     export default {
         data() {
             return {
-                user: {}
+                job: {}
             }
         },
         mounted() {
-            var url = '/ajax/user/1';
+            var url = 'api/job/';
             var self = this;
             axios.get(url).then(function(response){
-                self.user = response.data;
+                self.job = response.data;
             });
         }
     }
