@@ -16,4 +16,6 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::resource('job', 'Ajax\JobController');
+
+Route::resource('/jobs', 'JobController', ['except' => ['create', 'edit']]);
+Route::resource('/users', 'UserController', ['except' => ['create', 'edit']]);

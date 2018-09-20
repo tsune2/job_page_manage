@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Ajax;
+namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Job;
+use App\User;
 
-class JobController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,17 +15,7 @@ class JobController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return response(User::all());
     }
 
     /**
@@ -36,51 +26,44 @@ class JobController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = new User();
+        $user->save($request->all());
+        return responce($user, 201);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Job  $job
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(job $job)
+    public function show(User $user)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return responce($user);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $user->save($request->all());
+        return responce($user);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return response('{}');
     }
 }

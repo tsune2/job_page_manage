@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Ajax;
+namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Job;
 
 class JobController extends Controller
 {
@@ -42,10 +41,10 @@ class JobController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Job  $job
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(job $job)
+    public function show($id)
     {
         //
     }

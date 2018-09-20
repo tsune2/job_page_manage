@@ -16,6 +16,7 @@ class CreateJobsTable extends Migration
         Schema::create('jobs', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id'); // 顧客ID
+            $table->foreign('user_id')->references('id')->on('users');
             $table->integer('category_id'); // 職種ID
             $table->integer('contract_id'); // 雇用形態ID
             $table->text('title'); // 件名

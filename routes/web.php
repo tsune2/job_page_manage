@@ -11,36 +11,24 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
+// 管理ツール
+Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('auth')->group(function ()
+{
+  Route::get('/', function() {
+    return view('admin/index');
+  });
+  Route::get('/jobs', function() {
+    return view('admin/job/index');
+  });
+  Route::get('/users', function() {
+      return view('admin/user/index');
+  });
+});
+
+Route::namespace('Ajax')->prefix('ajax')->name('ajax.')->middleware('auth')->group(function ()
+{
+  Route::resource('/job', 'JobController');
+  Route::resource('/user', 'UserController');
 });
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::resource('users', 'UserController');
-Route::resource('ajax/user', 'Ajax\UserController');
-
-Route::get('/redirect', function () {
-    $query = http_build_query([
-        'client_id' => 'client-id',
-        'redirect_uri' => 'https://vm.jpm.jp/auth/callback',
-        'response_type' => 'code',
-        'scope' => '',
-    ]);
-    return redirect('https://vm.jpm.jp/oauth/authorize?'.$query);
-});
-Route::get('/callback', function (Request $request) {
-    $http = new GuzzleHttp\Client;
-    $response = $http->post('https://vm.jpm.jp/oauth/token', [
-        'form_params' => [
-            'grant_type' => 'authorization_code',
-            'client_id' => 'client-id',
-            'client_secret' => 'client-secret',
-            'redirect_uri' => 'https://vm.jpm.jp/auth/callback',
-            'code' => $request->code,
-        ],
-    ]);
-    return json_decode((string) $response->getBody(), true);
-});
