@@ -15,9 +15,7 @@ require('./bootstrap');
 // vue-routerを使う宣言
 Vue.use(VueRouter);
 
-window.Vue = require('vue');
-
-Vue.component('vue-layout', require('./components/User/Index.vue'));
+// Laravel passport トークン発行用コンポーネント
 Vue.component(
     'passport-clients',
     require('./components/passport/Clients.vue')
@@ -35,5 +33,18 @@ Vue.component(
 
 const app = new Vue({
     el: '#app',
-    router
+    router,
+    data: {
+        value: false
+    },
+    methods: {
+        isOpen: function() {
+            if (this.value === true) {
+                this.value = false;
+            } else {
+                this.value = true;
+            }
+        }
+    },
+
 });

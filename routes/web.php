@@ -28,7 +28,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('auth')->
 Route::namespace('Ajax')->prefix('ajax')->name('ajax.')->middleware('auth')->group(function ()
 {
   Route::resource('/job', 'JobController');
-  Route::resource('/user', 'UserController');
+  Route::get('/user', 'UserController@show')->name('user.show');
+  Route::post('/user/edit', 'UserController@edit')->name('user.edit');
 });
 
 Auth::routes();

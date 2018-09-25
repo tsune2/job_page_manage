@@ -66,8 +66,9 @@
                     </div>
                 </div>
             </nav>
+            <router-view name="menu"></router-view>
             <main role="main" class="container">
-                @yield('content')
+                <router-view></router-view>
             </main>
         </div>
         <!-- Scripts -->

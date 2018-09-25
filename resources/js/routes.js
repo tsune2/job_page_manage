@@ -3,16 +3,35 @@ import VueRouter from 'vue-router';
 let routes = [
     {
         path: '/',
-        component: require('./components/User/Home.vue')
+        name: 'top',
+        components: {
+            default: require('./components/Index.vue'),
+        }
     },
     {
-        path: '/about',
-        component: require('./components/User/About.vue')
+        path: '/users',
+        name: 'user',
+        components: {
+            default: require('./components/User/Index.vue'),
+            menu :  require('./components/User/Menubar.vue')
+        }
     },
     {
-        path: '/dashboard',
-        component: require('./components/User/Dashboard.vue')
-    }
+        path: '/users/edit',
+        name: 'edit',
+        components: {
+            default: require('./components/User/Edit.vue'),
+            menu :  require('./components/User/Menubar.vue')
+        }
+    },
+    {
+        path: '/users/delete',
+        name: 'delete',
+        components: {
+            default: require('./components/User/Delete.vue'),
+            menu :  require('./components/User/Menubar.vue')
+        }
+    },
 ];
 
 export default new VueRouter({
